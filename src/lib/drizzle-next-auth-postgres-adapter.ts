@@ -2,14 +2,12 @@ import { accounts, sessions, users, verificationTokens } from "@/db/schema";
 import { drizzle, PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import { and, eq } from "drizzle-orm";
-import { DefaultAdapter } from "next-auth/adapters";
+import { Adapter } from "next-auth/adapters";
 import { databaseConnectionString } from "@/db";
 
 export const PostgresJsDb = drizzle(postgres(databaseConnectionString));
 
-export function PostgresJsDrizzleAdapter(
-  db: PostgresJsDatabase
-): DefaultAdapter {
+export function PostgresJsDrizzleAdapter(db: PostgresJsDatabase): Adapter {
   return {
     createUser: async (data) => {
       return db
